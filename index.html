@@ -24,24 +24,24 @@
             <h2>Печать в 3Д</h2>
             <p>Видео, ссылки на пластик, настройки</p>
         </a>
+        <div id="admin-panel" class="container" style="display: none; margin-top: 20px;">
+    <hr style="border: 1px solid #444;">
+    <h3 style="color: #fff;">Редактор архива</h3>
+    <textarea id="editor-area" style="width: 100%; height: 200px; background: #222; color: #fff; border: 1px solid #444; padding: 10px; border-radius: 8px;"></textarea>
+    <br>
+    <button onclick="saveData()" style="padding: 10px 20px; cursor: pointer;">💾 Сохранить</button>
+    <button onclick="logout()" style="padding: 10px 20px; cursor: pointer; background: #444; color: white; border: none;">Выйти</button>
+</div>
+
+<div style="text-align: center; margin-top: 50px;">
+    <button id="login-btn" onclick="login()" style="opacity: 0.3; background: none; border: none; color: gray; cursor: pointer;">Админ-панель</button>
+</div>
     </div>
-    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
 
-<script>
-  const firebaseConfig = {
-  apiKey: "AIzaSyAIaL-kSIuy1GfnEXeDdeP92shDdbqT0tI",
-  authDomain: "file-dump-2a5ba.firebaseapp.com",
-  projectId: "file-dump-2a5ba",
-  storageBucket: "file-dump-2a5ba.firebasestorage.app",
-  messagingSenderId: "626874517340",
-  appId: "1:626874517340:web:24b542f773926277172399",
-  measurementId: "G-D4XR2BR5X9"
-};
-  firebase.initializeApp(firebaseConfig);
-  const db = firebase.firestore();
-  const auth = firebase.auth();
+<script src="admin.js"></script>
 </script>
 </body>
 </html>
