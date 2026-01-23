@@ -25,5 +25,23 @@
             <p>Видео, ссылки на пластик, настройки</p>
         </a>
     </div>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+
+<script>
+  const firebaseConfig = {
+  apiKey: "AIzaSyAIaL-kSIuy1GfnEXeDdeP92shDdbqT0tI",
+  authDomain: "file-dump-2a5ba.firebaseapp.com",
+  projectId: "file-dump-2a5ba",
+  storageBucket: "file-dump-2a5ba.firebasestorage.app",
+  messagingSenderId: "626874517340",
+  appId: "1:626874517340:web:24b542f773926277172399",
+  measurementId: "G-D4XR2BR5X9"
+};
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.firestore();
+  const auth = firebase.auth();
+</script>
 </body>
 </html>
