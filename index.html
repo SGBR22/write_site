@@ -19,90 +19,77 @@
         </div>
     </header>
 
-    <div class="container main-menu">
-        <a href="study.html" class="folder-card tarkov-card">
-            <div class="icon">⚙️</div>
-            <div class="card-header">
-                <h2>ЧЕРТЕЖИ</h2>
-                <span class="card-tag">[ЗАПЕЧАТАНО]</span>
-            </div>
-            <p>Техническая документация и схемы</p>
-            <div class="card-footer">
-                <span class="card-info">ДОСТУП: ОГРАНИЧЕН</span>
-                <span class="card-info">▼ 14.12.2023</span>
-            </div>
-        </a>
+    <div class="container file-grid">
+        <div class="file-row">
+            <a href="study.html" class="file-item">
+                <div class="file-header">
+                    <div class="file-type">[ЗАПЕЧАТАНО]</div>
+                    <div class="file-date">▼ 14.12.2023</div>
+                </div>
+                <div class="file-name">ЧЕРТЕЖИ</div>
+                <div class="file-description">Техническая документация и схемы</div>
+                <div class="file-status">
+                    <span class="status-indicator status-restricted"></span>
+                    ДОСТУП: ОГРАНИЧЕН
+                </div>
+            </a>
 
-        <a href="3dprint.html" class="folder-card tarkov-card">
-            <div class="icon">🛠️</div>
-            <div class="card-header">
-                <h2>ПРОИЗВОДСТВО</h2>
-                <span class="card-tag">[АКТИВНО]</span>
-            </div>
-            <p>Производственные спецификации и логистика</p>
-            <div class="card-footer">
-                <span class="card-info">ДОСТУП: РАЗРЕШЕН</span>
-                <span class="card-info">▼ 28.02.2024</span>
-            </div>
-        </a>
+            <a href="3dprint.html" class="file-item">
+                <div class="file-header">
+                    <div class="file-type">[АКТИВНО]</div>
+                    <div class="file-date">▼ 28.02.2024</div>
+                </div>
+                <div class="file-name">ПРОИЗВОДСТВО</div>
+                <div class="file-description">Производственные спецификации и логистика</div>
+                <div class="file-status">
+                    <span class="status-indicator status-active"></span>
+                    ДОСТУП: РАЗРЕШЕН
+                </div>
+            </a>
+        </div>
 
-        <a href="#" class="folder-card tarkov-card locked">
-            <div class="icon">🔒</div>
-            <div class="card-header">
-                <h2>СНАРЯЖЕНИЕ</h2>
-                <span class="card-tag">[ЗАБЛОКИРОВАНО]</span>
+        <div class="file-row">
+            <div class="file-item file-locked">
+                <div class="file-header">
+                    <div class="file-type">[ЗАБЛОКИРОВАНО]</div>
+                    <div class="file-date">▼ --.--.----</div>
+                </div>
+                <div class="file-name">СНАРЯЖЕНИЕ</div>
+                <div class="file-description">Требуется авторизация BEAR/USEC</div>
+                <div class="file-status">
+                    <span class="status-indicator status-locked"></span>
+                    ДОСТУП: ЗАКРЫТ
+                </div>
             </div>
-            <p>Требуется авторизация BEAR/USEC</p>
-            <div class="card-footer">
-                <span class="card-info">ДОСТУП: ЗАКРЫТ</span>
-                <span class="card-info">▼ --.--.----</span>
+
+            <div class="file-item file-locked">
+                <div class="file-header">
+                    <div class="file-type">[ЗАБЛОКИРОВАНО]</div>
+                    <div class="file-date">▼ --.--.----</div>
+                </div>
+                <div class="file-name">КОНТРАКТЫ</div>
+                <div class="file-description">Задания и маршруты доставки</div>
+                <div class="file-status">
+                    <span class="status-indicator status-locked"></span>
+                    ДОСТУП: ЗАКРЫТ
+                </div>
             </div>
-        </a>
+        </div>
     </div>
 
     <div class="terminal">
-        <div class="terminal-header">
-            <span class="terminal-title">[ ТЕРМИНАЛ ДОСТУПА ]</span>
-        </div>
-        <div class="terminal-body">
-            <p>> ИНИЦИАЛИЗАЦИЯ СИСТЕМЫ... УСПЕХ</p>
-            <p>> ЗАГРУЖЕНО РАЗДЕЛОВ: <span class="highlight">2</span></p>
-            <p>> СТАТУС: <span class="status-online">ОПЕРАТИВНЫЙ</span></p>
-            <p>> ВВЕДИТЕ КОМАНДУ...</p>
-            <div class="cursor">_</div>
+        <div class="terminal-line">> ИНИЦИАЛИЗАЦИЯ СИСТЕМЫ... <span class="terminal-success">УСПЕХ</span></div>
+        <div class="terminal-line">> ЗАГРУЖЕНО РАЗДЕЛОВ: <span class="terminal-highlight">2</span></div>
+        <div class="terminal-line">> СТАТУС: <span class="terminal-status">ОПЕРАТИВНЫЙ</span></div>
+        <div class="terminal-input">
+            <span class="terminal-prompt">></span>
+            <span class="terminal-cursor">_</span>
         </div>
     </div>
 
     <script>
-        // Мигающий курсор
-        const cursor = document.querySelector('.cursor');
-        setInterval(() => {
-            cursor.style.opacity = cursor.style.opacity === '0' ? '1' : '0';
-        }, 500);
-
-        // Эффект при наведении на карточки
-        document.querySelectorAll('.tarkov-card').forEach(card => {
-            card.addEventListener('mouseenter', () => {
-                if(!card.classList.contains('locked')) {
-                    card.style.transform = 'translateY(-8px) scale(1.02)';
-                }
-            });
-            card.addEventListener('mouseleave', () => {
-                card.style.transform = '';
-            });
-        });
-
-        // Звуковой эффект (опционально, можно добавить позже)
-        const clickSound = new Audio('https://assets.mixkit.co/sfx/preview/mixkit-select-click-1109.mp3');
-        document.querySelectorAll('.tarkov-card:not(.locked)').forEach(card => {
-            card.addEventListener('click', (e) => {
-                e.preventDefault();
-                // clickSound.play(); // Раскомментировать при добавлении звука
-                setTimeout(() => {
-                    window.location.href = card.getAttribute('href');
-                }, 200);
-            });
-        });
+        const cursor = document.querySelector('.terminal-cursor');
+        setInterval(() => cursor.style.opacity = cursor.style.opacity === '0' ? '1' : '0', 500);
     </script>
 </body>
 </html>
