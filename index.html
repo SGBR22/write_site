@@ -4,124 +4,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Моя личная страница</title>
-    <style>
-        /* Основные стили для красоты */
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f7f6; /* Светлый приятный фон */
-            color: #333;
-        }
-
-        header {
-            background: #2c3e50; /* Темная шапка */
-            color: white;
-            padding: 2rem 1rem;
-            text-align: center;
-        }
-
-        .container {
-            max-width: 800px;
-            margin: 20px auto;
-            padding: 0 20px;
-        }
-
-        /* Стили для блоков */
-        .card {
-            background: white;
-            padding: 20px;
-            margin-bottom: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
-
-        h2 {
-            color: #2c3e50;
-            border-bottom: 2px solid #3498db;
-            padding-bottom: 10px;
-        }
-
-        /* Стили для ссылок */
-        .links-list {
-            list-style: none;
-            padding: 0;
-        }
-
-        .links-list li {
-            margin: 10px 0;
-        }
-
-        .links-list a {
-            text-decoration: none;
-            color: #3498db;
-            font-weight: bold;
-        }
-
-        .links-list a:hover {
-            text-decoration: underline;
-        }
-
-        /* Стили для видео (адаптивность) */
-        .video-container {
-            position: relative;
-            padding-bottom: 56.25%; /* Соотношение сторон 16:9 */
-            height: 0;
-            overflow: hidden;
-            border-radius: 8px;
-        }
-
-        .video-container iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
-
-        footer {
-            text-align: center;
-            padding: 20px;
-            font-size: 0.9rem;
-            color: #777;
-        }
-    </style>
+    
+    <link rel="stylesheet" href="style.css">
+    
 </head>
 <body>
 
     <header>
         <h1>Привет! Это мой сайт</h1>
-        <p>Здесь я делюсь полезными материалами и видео</p>
+        <p>Настройка стилей теперь в отдельном файле</p>
     </header>
 
     <div class="container">
-
         <section class="card">
-            <h2>Обо мне</h2>
-            <p>Здесь ты можешь написать любой текст. Просто замени это предложение на свою историю, описание проекта или любую другую информацию.</p>
+            <h2>Текстовый блок</h2>
+            <p>Теперь код здесь выглядит гораздо короче и понятнее.</p>
         </section>
 
         <section class="card">
-            <h2>Полезные ссылки</h2>
+            <h2>Ссылки</h2>
             <ul class="links-list">
-                <li><a href="https://github.com" target="_blank">→ Мой GitHub профиль</a></li>
-                <li><a href="https://google.com" target="_blank">→ Полезный ресурс №1</a></li>
-                <li><a href="#" target="_blank">→ Еще одна ссылка</a></li>
+                <li><a href="#">Твоя ссылка</a></li>
             </ul>
         </section>
 
         <section class="card">
-            <h2>Интересное видео</h2>
+            <h2>Видео</h2>
             <div class="video-container">
                 <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen></iframe>
             </div>
         </section>
-
     </div>
 
     <footer>
-        <p>&copy; 2024 Моя страница на GitHub</p>
+        <p>&copy; 2024 Чистый код</p>
     </footer>
 
 </body>
