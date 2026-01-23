@@ -3,44 +3,108 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ПЕЧАТЬ В 3Д</title>
+    <title>ПРОИЗВОДСТВО - ТАРКОВ АРХИВ</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header>
-        <h1>📚 Печать в 3Д</h1>
-        <a href="index.html" style="color: white; text-decoration: none;">← Назад на главную</a>
+        <div class="header-overlay">
+            <div class="header-top">
+                <a href="index.html" class="back-button">◀ НА ГЛАВНУЮ</a>
+                <div class="breadcrumb">
+                    <span class="crumb">ТАРКОВ АРХИВ</span>
+                    <span class="separator">/</span>
+                    <span class="crumb active">ПРОИЗВОДСТВО</span>
+                </div>
+            </div>
+            <h1 class="title-glow">▲ ПРОИЗВОДСТВО</h1>
+            <p class="subtitle">[ ПРОИЗВОДСТВЕННЫЕ СПЕЦИФИКАЦИИ И ЛОГИСТИКА ]</p>
+            <div class="status-bar">
+                <span class="status-item">▲ ОНЛАЙН</span>
+                <span class="status-item">СЕКЦИЙ: 2</span>
+                <span class="status-item">ОБНОВЛЕНО: 28.02.2024</span>
+            </div>
+        </div>
     </header>
 
     <div class="container">
-        <details class="card">
-            <summary> Bambu Studio</summary>
-            <div class="content">
-                <p>Обучающее видео под пиво</p>
-                <div class="video-container">
-                    <iframe width="560" height="315" src="https://www.youtube.com/embed/lcINarzYd30?si=yYRIWUuTpi3yk4hk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        <div class="section-grid">
+            <div class="section-item">
+                <div class="section-header">
+                    <div class="section-tag">[АКТИВНО]</div>
+                    <div class="section-date">▼ 28.02.2024</div>
+                </div>
+                <h2 class="section-title">BAMBU STUDIO</h2>
+                <div class="section-content">
+                    <div class="info-block">
+                        <h3 class="info-title">ОБУЧАЮЩЕЕ ВИДЕО</h3>
+                        <p class="info-text">Процедура настройки производственного оборудования</p>
+                        <div class="video-container">
+                            <iframe width="560" height="315" src="https://www.youtube.com/embed/lcINarzYd30?si=yYRIWUuTpi3yk4hk" 
+                                    title="YouTube video player" frameborder="0" 
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                                    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                    
+                    <div class="info-block">
+                        <h3 class="info-title">НАСТРОЙКИ ПРОИЗВОДСТВА</h3>
+                        <div class="param-list">
+                            <div class="param-item">
+                                <span class="param-name">Процедура:</span>
+                                <span class="param-value">ПЕЧАТЬ</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-           <div class="content">
-                <p>Настройки печати</p>
-                <ul>
-                    <p>Печеть </p>
-                </ul>
-            </div>
-        </details>
 
-        <details class="card">
-            <summary>Пластик для покупки</summary>
-            <div class="content">
-                
-                <ul>
-                    <li><a href="https://www.ozon.ru/product/plastik-petg-dlya-3d-pechati-plastiq-salatovyy-1-75-mm-320m-631868779/?from=share_android&perehod=smm_share_button_productpage_link">Plastiq PETG</a></li>
-                    <li><a href="https://greg-3d.ru/#pHome">Greg - опт</a></li>
-                </ul>
+            <div class="section-item">
+                <div class="section-header">
+                    <div class="section-tag">[АКТИВНО]</div>
+                    <div class="section-date">▼ 28.02.2024</div>
+                </div>
+                <h2 class="section-title">МАТЕРИАЛЫ ДЛЯ ЗАКУПКИ</h2>
+                <div class="section-content">
+                    <div class="resource-list">
+                        <div class="resource-item">
+                            <div class="resource-header">
+                                <span class="resource-name">Plastiq PETG</span>
+                                <span class="resource-status">[В НАЛИЧИИ]</span>
+                            </div>
+                            <p class="resource-desc">Салатовый, 1.75 мм, 320м</p>
+                            <a href="https://www.ozon.ru/product/plastik-petg-dlya-3d-pechati-plastiq-salatovyy-1-75-mm-320m-631868779/?from=share_android&perehod=smm_share_button_productpage_link" 
+                               class="resource-link" target="_blank">▶ ПЕРЕЙТИ К ПОСТАВЩИКУ</a>
+                        </div>
+                        
+                        <div class="resource-item">
+                            <div class="resource-header">
+                                <span class="resource-name">Greg - опт</span>
+                                <span class="resource-status">[ОПТОВЫЕ]</span>
+                            </div>
+                            <p class="resource-desc">Оптовые поставки материалов</p>
+                            <a href="https://greg-3d.ru/#pHome" 
+                               class="resource-link" target="_blank">▶ ПЕРЕЙТИ К ПОСТАВЩИКУ</a>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </details>
-
-      
+        </div>
     </div>
+
+    <div class="terminal">
+        <div class="terminal-line">> ЗАГРУЖЕН РАЗДЕЛ: <span class="terminal-highlight">ПРОИЗВОДСТВО</span></div>
+        <div class="terminal-line">> СЕКЦИЙ ЗАГРУЖЕНО: <span class="terminal-highlight">2</span></div>
+        <div class="terminal-line">> СТАТУС: <span class="terminal-status">ОПЕРАТИВНЫЙ</span></div>
+        <div class="terminal-input">
+            <span class="terminal-prompt">></span>
+            <span class="terminal-cursor">_</span>
+        </div>
+    </div>
+
+    <script>
+        const cursor = document.querySelector('.terminal-cursor');
+        setInterval(() => cursor.style.opacity = cursor.style.opacity === '0' ? '1' : '0', 500);
+    </script>
 </body>
 </html>
