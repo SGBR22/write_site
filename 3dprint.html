@@ -28,17 +28,13 @@
     </header>
 
     <div class="container">
-        <div class="collapsible-section">
-            <div class="section-header toggle-header">
-                <div class="section-meta">
-                    <div class="section-tag">[АКТИВНО]</div>
-                    <div class="section-date">▼ 28.02.2024</div>
-                </div>
-                <h2 class="section-title">BAMBU STUDIO</h2>
-                <div class="toggle-icon">▼</div>
-            </div>
-            
-            <div class="section-content">
+        <details class="tarkov-details">
+            <summary class="tarkov-summary">
+                <span class="summary-tag">[АКТИВНО]</span>
+                <span class="summary-title">BAMBU STUDIO</span>
+                <span class="summary-date">▼ 28.02.2024</span>
+            </summary>
+            <div class="tarkov-content">
                 <div class="content-block">
                     <h3 class="block-title">ОБУЧАЮЩЕЕ ВИДЕО</h3>
                     <p class="block-description">Процедура настройки производственного оборудования</p>
@@ -60,19 +56,15 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </details>
 
-        <div class="collapsible-section">
-            <div class="section-header toggle-header">
-                <div class="section-meta">
-                    <div class="section-tag">[АКТИВНО]</div>
-                    <div class="section-date">▼ 28.02.2024</div>
-                </div>
-                <h2 class="section-title">МАТЕРИАЛЫ ДЛЯ ЗАКУПКИ</h2>
-                <div class="toggle-icon">▼</div>
-            </div>
-            
-            <div class="section-content">
+        <details class="tarkov-details">
+            <summary class="tarkov-summary">
+                <span class="summary-tag">[АКТИВНО]</span>
+                <span class="summary-title">МАТЕРИАЛЫ ДЛЯ ЗАКУПКИ</span>
+                <span class="summary-date">▼ 28.02.2024</span>
+            </summary>
+            <div class="tarkov-content">
                 <div class="resource-list">
                     <div class="resource-item">
                         <div class="resource-header">
@@ -95,7 +87,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </details>
     </div>
 
     <div class="terminal">
@@ -109,40 +101,8 @@
     </div>
 
     <script>
-        // Терминальный курсор
         const cursor = document.querySelector('.terminal-cursor');
         setInterval(() => cursor.style.opacity = cursor.style.opacity === '0' ? '1' : '0', 500);
-        
-        // Сворачиваемые секции
-        document.querySelectorAll('.toggle-header').forEach(header => {
-            header.addEventListener('click', function() {
-                const section = this.closest('.collapsible-section');
-                const content = section.querySelector('.section-content');
-                const icon = this.querySelector('.toggle-icon');
-                
-                if (content.style.maxHeight) {
-                    content.style.maxHeight = null;
-                    icon.textContent = '▼';
-                } else {
-                    content.style.maxHeight = content.scrollHeight + 'px';
-                    icon.textContent = '▲';
-                }
-            });
-        });
-        
-        // По умолчанию открываем первую секцию
-        document.querySelectorAll('.collapsible-section').forEach((section, index) => {
-            const content = section.querySelector('.section-content');
-            const icon = section.querySelector('.toggle-icon');
-            
-            if (index === 0) {
-                content.style.maxHeight = content.scrollHeight + 'px';
-                icon.textContent = '▲';
-            } else {
-                content.style.maxHeight = null;
-                icon.textContent = '▼';
-            }
-        });
     </script>
 </body>
 </html>
