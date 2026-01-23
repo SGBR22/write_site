@@ -28,64 +28,70 @@
     </header>
 
     <div class="container">
-        <div class="section-grid">
-            <div class="section-item">
-                <div class="section-header">
+        <div class="collapsible-section">
+            <div class="section-header toggle-header">
+                <div class="section-meta">
                     <div class="section-tag">[АКТИВНО]</div>
                     <div class="section-date">▼ 28.02.2024</div>
                 </div>
                 <h2 class="section-title">BAMBU STUDIO</h2>
-                <div class="section-content">
-                    <div class="info-block">
-                        <h3 class="info-title">ОБУЧАЮЩЕЕ ВИДЕО</h3>
-                        <p class="info-text">Процедура настройки производственного оборудования</p>
-                        <div class="video-container">
-                            <iframe width="560" height="315" src="https://www.youtube.com/embed/lcINarzYd30?si=yYRIWUuTpi3yk4hk" 
-                                    title="YouTube video player" frameborder="0" 
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                                    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                        </div>
+                <div class="toggle-icon">▼</div>
+            </div>
+            
+            <div class="section-content">
+                <div class="content-block">
+                    <h3 class="block-title">ОБУЧАЮЩЕЕ ВИДЕО</h3>
+                    <p class="block-description">Процедура настройки производственного оборудования</p>
+                    <div class="video-container">
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/lcINarzYd30?si=yYRIWUuTpi3yk4hk" 
+                                title="YouTube video player" frameborder="0" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                     </div>
-                    
-                    <div class="info-block">
-                        <h3 class="info-title">НАСТРОЙКИ ПРОИЗВОДСТВА</h3>
-                        <div class="param-list">
-                            <div class="param-item">
-                                <span class="param-name">Процедура:</span>
-                                <span class="param-value">ПЕЧАТЬ</span>
-                            </div>
+                </div>
+                
+                <div class="content-block">
+                    <h3 class="block-title">НАСТРОЙКИ ПРОИЗВОДСТВА</h3>
+                    <div class="param-list">
+                        <div class="param-item">
+                            <span class="param-name">Процедура:</span>
+                            <span class="param-value">ПЕЧАТЬ</span>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <div class="section-item">
-                <div class="section-header">
+        <div class="collapsible-section">
+            <div class="section-header toggle-header">
+                <div class="section-meta">
                     <div class="section-tag">[АКТИВНО]</div>
                     <div class="section-date">▼ 28.02.2024</div>
                 </div>
                 <h2 class="section-title">МАТЕРИАЛЫ ДЛЯ ЗАКУПКИ</h2>
-                <div class="section-content">
-                    <div class="resource-list">
-                        <div class="resource-item">
-                            <div class="resource-header">
-                                <span class="resource-name">Plastiq PETG</span>
-                                <span class="resource-status">[В НАЛИЧИИ]</span>
-                            </div>
-                            <p class="resource-desc">Салатовый, 1.75 мм, 320м</p>
-                            <a href="https://www.ozon.ru/product/plastik-petg-dlya-3d-pechati-plastiq-salatovyy-1-75-mm-320m-631868779/?from=share_android&perehod=smm_share_button_productpage_link" 
-                               class="resource-link" target="_blank">▶ ПЕРЕЙТИ К ПОСТАВЩИКУ</a>
+                <div class="toggle-icon">▼</div>
+            </div>
+            
+            <div class="section-content">
+                <div class="resource-list">
+                    <div class="resource-item">
+                        <div class="resource-header">
+                            <span class="resource-name">Plastiq PETG</span>
+                            <span class="resource-status">[В НАЛИЧИИ]</span>
                         </div>
-                        
-                        <div class="resource-item">
-                            <div class="resource-header">
-                                <span class="resource-name">Greg - опт</span>
-                                <span class="resource-status">[ОПТОВЫЕ]</span>
-                            </div>
-                            <p class="resource-desc">Оптовые поставки материалов</p>
-                            <a href="https://greg-3d.ru/#pHome" 
-                               class="resource-link" target="_blank">▶ ПЕРЕЙТИ К ПОСТАВЩИКУ</a>
+                        <p class="resource-desc">Салатовый, 1.75 мм, 320м</p>
+                        <a href="https://www.ozon.ru/product/plastik-petg-dlya-3d-pechati-plastiq-salatovyy-1-75-mm-320m-631868779/?from=share_android&perehod=smm_share_button_productpage_link" 
+                           class="resource-link" target="_blank">▶ ПЕРЕЙТИ К ПОСТАВЩИКУ</a>
+                    </div>
+                    
+                    <div class="resource-item">
+                        <div class="resource-header">
+                            <span class="resource-name">Greg - опт</span>
+                            <span class="resource-status">[ОПТОВЫЕ]</span>
                         </div>
+                        <p class="resource-desc">Оптовые поставки материалов</p>
+                        <a href="https://greg-3d.ru/#pHome" 
+                           class="resource-link" target="_blank">▶ ПЕРЕЙТИ К ПОСТАВЩИКУ</a>
                     </div>
                 </div>
             </div>
@@ -103,8 +109,40 @@
     </div>
 
     <script>
+        // Терминальный курсор
         const cursor = document.querySelector('.terminal-cursor');
         setInterval(() => cursor.style.opacity = cursor.style.opacity === '0' ? '1' : '0', 500);
+        
+        // Сворачиваемые секции
+        document.querySelectorAll('.toggle-header').forEach(header => {
+            header.addEventListener('click', function() {
+                const section = this.closest('.collapsible-section');
+                const content = section.querySelector('.section-content');
+                const icon = this.querySelector('.toggle-icon');
+                
+                if (content.style.maxHeight) {
+                    content.style.maxHeight = null;
+                    icon.textContent = '▼';
+                } else {
+                    content.style.maxHeight = content.scrollHeight + 'px';
+                    icon.textContent = '▲';
+                }
+            });
+        });
+        
+        // По умолчанию открываем первую секцию
+        document.querySelectorAll('.collapsible-section').forEach((section, index) => {
+            const content = section.querySelector('.section-content');
+            const icon = section.querySelector('.toggle-icon');
+            
+            if (index === 0) {
+                content.style.maxHeight = content.scrollHeight + 'px';
+                icon.textContent = '▲';
+            } else {
+                content.style.maxHeight = null;
+                icon.textContent = '▼';
+            }
+        });
     </script>
 </body>
 </html>
