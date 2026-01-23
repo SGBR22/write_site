@@ -76,3 +76,49 @@ footer {
     font-size: 0.9rem;
     color: #777;
 }
+/* Стили для главного меню (плитка) */
+.main-menu {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+.folder-card {
+    text-decoration: none;
+    color: inherit;
+    background: white;
+    padding: 30px;
+    width: 250px;
+    text-align: center;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    transition: transform 0.2s;
+}
+
+.folder-card:hover {
+    transform: translateY(-5px);
+    border: 2px solid #3498db;
+}
+
+.icon {
+    font-size: 50px;
+    margin-bottom: 10px;
+}
+
+/* Стили для раскрывающихся папок (details) */
+details.card {
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+summary {
+    font-size: 1.2rem;
+    font-weight: bold;
+    outline: none;
+}
+
+.content {
+    padding-top: 15px;
+    cursor: default;
+}
