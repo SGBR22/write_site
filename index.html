@@ -112,43 +112,6 @@
     </div>
 
     <script>
-        // Инициализация звуков
-        let audioEnabled = true;
-        let audioInitialized = false;
-        
-        // Звуковые эффекты
-        const fireSound = new Audio('https://assets.mixkit.co/sfx/preview/mixkit-fire-woosh-1076.mp3');
-        const shotSound = new Audio('https://assets.mixkit.co/sfx/preview/mixkit-gun-shot-1662.mp3');
-        const clickSound = new Audio('https://assets.mixkit.co/sfx/preview/mixkit-select-click-1109.mp3');
-        const hoverSound = new Audio('https://assets.mixkit.co/sfx/preview/mixkit-hover-sci-fi-mouse-811.mp3');
-        
-        // Настройка громкости
-        fireSound.volume = 0.3;
-        shotSound.volume = 0.2;
-        clickSound.volume = 0.4;
-        hoverSound.volume = 0.3;
-        
-        // Предзагрузка звуков
-        function preloadAudio() {
-            fireSound.load();
-            shotSound.load();
-            clickSound.load();
-            hoverSound.load();
-            audioInitialized = true;
-            console.log('🔊 Аудио инициализировано');
-        }
-        
-        // Ждем загрузки страницы для предзагрузки звуков
-        window.addEventListener('load', preloadAudio);
-        
-        // Активация звуков при первом взаимодействии с пользователем
-        document.addEventListener('click', () => {
-            if (!audioInitialized) {
-                preloadAudio();
-            }
-        }, { once: true });
-        
-        // Терминальный курсор
         const cursor = document.querySelector('.terminal-cursor');
         setInterval(() => cursor.style.opacity = cursor.style.opacity === '0' ? '1' : '0', 500);
         
@@ -162,118 +125,36 @@
             statusElement.textContent = statuses[statusIndex];
         }, 3000);
         
-        // Звуковые эффекты для блоков
-        const fileItems = document.querySelectorAll('.file-item');
-        
+        // Звуковые эффекты (опционально)
+        const fileItems = document.querySelectorAll('.file-item:not(.file-locked)');
         fileItems.forEach(item => {
-            // Звук при наведении
-            item.addEventListener('mouseenter', (e) => {
-                if (audioEnabled && audioInitialized) {
-                    hoverSound.currentTime = 0;
-                    hoverSound.play().catch(e => console.log('🔇 Звук наведения не воспроизведён:', e));
-                    
-                    // Дополнительный звук огня для активных блоков
-                    if (!item.classList.contains('file-locked')) {
-                        setTimeout(() => {
-                            fireSound.currentTime = 0;
-                            fireSound.play().catch(e => console.log('🔇 Звук огня не воспроизведён:', e));
-                        }, 150);
-                    }
-                }
+            item.addEventListener('mouseenter', () => {
+                // Воспроизведение звука огня
+                const fireSound = new Audio('https://assets.mixkit.co/sfx/preview/mixkit-fire-woosh-1076.mp3');
+                fireSound.volume = 0.3;
+                // fireSound.play(); // Раскомментировать для звука
             });
             
-            // Звук при клике
             item.addEventListener('click', (e) => {
-                if (audioEnabled && audioInitialized) {
-                    // Звук клика
-                    clickSound.currentTime = 0;
-                    clickSound.play().catch(e => console.log('🔇 Звук клика не воспроизведён:', e));
-                    
-                    // Звук выстрела для незаблокированных элементов
-                    if (!item.classList.contains('file-locked')) {
-                        setTimeout(() => {
-                            shotSound.currentTime = 0;
-                            shotSound.play().catch(e => console.log('🔇 Звук выстрела не воспроизведён:', e));
-                        }, 50);
-                    }
-                    
-                    // Эффект вспышки
-                    const flash = document.createElement('div');
-                    flash.className = 'click-flash';
-                    flash.style.left = `${e.clientX}px`;
-                    flash.style.top = `${e.clientY}px`;
-                    document.body.appendChild(flash);
-                    
-                    // Задержка перехода для проигрывания звука
-                    if (!item.classList.contains('file-locked')) {
-                        e.preventDefault();
-                        setTimeout(() => {
-                            window.location.href = item.getAttribute('href');
-                        }, 300);
-                    }
-                    
-                    setTimeout(() => flash.remove(), 600);
-                }
+                e.preventDefault();
+                // Звук выстрела при клике
+                const shotSound = new Audio('https://assets.mixkit.co/sfx/preview/mixkit-gun-shot-1662.mp3');
+                shotSound.volume = 0.2;
+                // shotSound.play(); // Раскомментировать для звука
+                
+                // Эффект вспышки
+                const flash = document.createElement('div');
+                flash.className = 'click-flash';
+                flash.style.left = `${e.clientX}px`;
+                flash.style.top = `${e.clientY}px`;
+                document.body.appendChild(flash);
+                
+                setTimeout(() => {
+                    window.location.href = item.getAttribute('href');
+                }, 300);
+                
+                setTimeout(() => flash.remove(), 600);
             });
-        });
-        
-        // Звуки для терминала (тикание)
-        const terminal = document.querySelector('.terminal');
-        let terminalTick;
-        
-        terminal.addEventListener('mouseenter', () => {
-            if (audioEnabled && audioInitialized) {
-                terminalTick = setInterval(() => {
-                    clickSound.currentTime = 0;
-                    clickSound.volume = 0.1;
-                    clickSound.play().catch(e => console.log('🔇 Терминальный звук не воспроизведён:', e));
-                }, 800);
-            }
-        });
-        
-        terminal.addEventListener('mouseleave', () => {
-            if (terminalTick) {
-                clearInterval(terminalTick);
-            }
-        });
-        
-        // Кнопка отключения звука (невидимая, активируется по Ctrl+M)
-        document.addEventListener('keydown', (e) => {
-            if (e.ctrlKey && e.key === 'm') {
-                audioEnabled = !audioEnabled;
-                const status = audioEnabled ? 'ВКЛЮЧЁН' : 'ВЫКЛЮЧЕН';
-                
-                // Создаем уведомление в терминале
-                const terminalInput = document.querySelector('.terminal-input');
-                const notification = document.createElement('div');
-                notification.className = 'terminal-line';
-                notification.innerHTML = `> АУДИО: <span class="${audioEnabled ? 'terminal-success' : 'terminal-highlight'}">${status}</span>`;
-                
-                terminalInput.parentNode.insertBefore(notification, terminalInput);
-                
-                // Удаляем уведомление через 3 секунды
-                setTimeout(() => {
-                    notification.remove();
-                }, 3000);
-                
-                // Звук переключения
-                if (audioInitialized) {
-                    clickSound.currentTime = 0;
-                    clickSound.volume = 0.5;
-                    clickSound.play().catch(e => console.log('🔇 Звук переключения не воспроизведён'));
-                }
-            }
-        });
-        
-        // Звук при загрузке страницы
-        window.addEventListener('load', () => {
-            if (audioEnabled && audioInitialized) {
-                setTimeout(() => {
-                    clickSound.currentTime = 0;
-                    clickSound.volume = 0.3;
-                    clickSound.play().catch(e => console.log('🔇 Звук загрузки не воспроизведён:', e));
-                }, 1000);
-            }
         });
     </script>
 </body>
