@@ -12,8 +12,9 @@
             <h1 class="title-glow">АРХИВ</h1>
             <p class="subtitle">[ ХРАНИЛИЩЕ КОНТРАБАНДЫ ]</p>
             <div class="status-bar">
-                <span class="status-item">Почти в сети</span>
+                <span class="status-item">ПОЧТИ В СЕТИ</span>
                 <span class="status-item">ОПАСНОСТЬ: НИЗКАЯ</span>
+                <span class="status-item">ДОСТУПНЫХ ШТУК: 2</span>
             </div>
         </div>
     </header>
@@ -23,20 +24,20 @@
             <a href="study.html" class="file-item">
                 <div class="file-header">
                     <div class="file-type">[БЕССМЫСЛЕННО]</div>
-                    
+                    <div class="file-date">▼ 14.12.2023</div>
                 </div>
                 <div class="file-name">ИНСТИТУТ</div>
-                <div class="file-description">Документация</div>
+                <div class="file-description">Документация и протоколы обучения</div>
                 <div class="file-status">
                     <span class="status-indicator status-restricted"></span>
-                    ДОСТУП: Как можно реже
+                    ДОСТУП: КАК МОЖНО РЕЖЕ
                 </div>
             </a>
 
             <a href="3dprint.html" class="file-item">
                 <div class="file-header">
                     <div class="file-type">[АКТИВНО НИЧЕГО НЕ ДЕЛАЕТ]</div>
-                
+                    <div class="file-date">▼ 28.02.2024</div>
                 </div>
                 <div class="file-name">ПРОИЗВОДСТВО</div>
                 <div class="file-description">Производственные спецификации и логистика</div>
@@ -48,18 +49,18 @@
         </div>
 
         <div class="file-row">
-            <div class="file-item file-locked">
+            <a href="media.html" class="file-item">
                 <div class="file-header">
-                    <div class="file-type">[ДОСТУП ПО ПАРОЛЮ]</div>
-                    <!-- <div class="file-date">▼ --.--.----</div> -->
+                    <div class="file-type">[ДОСТУП ОТКРЫТ]</div>
+                    <div class="file-date">▼ 15.03.2024</div>
                 </div>
-                <div class="file-name">РЕЛАКСАЦИОННЫЙ ПЕРИОД</div>
-                <div class="file-description">Неубиваемая класика</div>
+                <div class="file-name">МЕДИА-РЕЙД</div>
+                <div class="file-description">Кинопротоколы и сериальные контракты для привала</div>
                 <div class="file-status">
-                    <span class="status-indicator status-locked"></span>
-                    ДОСТУП: ПО ПАРОЛЮ
+                    <span class="status-indicator status-active"></span>
+                    ДОСТУП: РАЗРЕШЕН
                 </div>
-            </div>
+            </a>
 
             <div class="file-item file-locked">
                 <div class="file-header">
@@ -78,7 +79,9 @@
 
     <div class="terminal">
         <div class="terminal-line">> ИНИЦИАЛИЗАЦИЯ СИСТЕМЫ... <span class="terminal-success">УСПЕХ</span></div>
+        <div class="terminal-line">> ЗАГРУЖЕНО РАЗДЕЛОВ: <span class="terminal-highlight">3</span></div>
         <div class="terminal-line">> СТАТУС: <span class="terminal-status">РАЗРАБОТКА</span></div>
+        <div class="terminal-line">> СИСТЕМА ГОТОВА К ЭКСПЛУАТАЦИИ</div>
         <div class="terminal-input">
             <span class="terminal-prompt">></span>
             <span class="terminal-cursor">_</span>
@@ -88,6 +91,16 @@
     <script>
         const cursor = document.querySelector('.terminal-cursor');
         setInterval(() => cursor.style.opacity = cursor.style.opacity === '0' ? '1' : '0', 500);
+        
+        // Анимация для статуса в терминале
+        const statusElement = document.querySelector('.terminal-status');
+        let statusIndex = 0;
+        const statuses = ['РАЗРАБОТКА', 'ТЕСТИРОВАНИЕ', 'ОПЕРАТИВНЫЙ'];
+        
+        setInterval(() => {
+            statusIndex = (statusIndex + 1) % statuses.length;
+            statusElement.textContent = statuses[statusIndex];
+        }, 3000);
     </script>
 </body>
 </html>
