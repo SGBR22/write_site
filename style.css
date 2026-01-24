@@ -1061,3 +1061,266 @@ a:focus {
 }
 
 /* Остальные стили остаются без изменений из предыдущего ответа */
+/* Добавить в style.css */
+
+/* Эффект огня при наведении */
+.fire-effect {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.fire-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        45deg,
+        transparent 0%,
+        rgba(255, 100, 0, 0.1) 30%,
+        rgba(255, 50, 0, 0.2) 50%,
+        rgba(255, 100, 0, 0.1) 70%,
+        transparent 100%
+    );
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.fire-effect:hover .fire-overlay {
+    opacity: 1;
+    animation: fire-glow 1.5s infinite alternate;
+}
+
+.fire-effect:hover {
+    box-shadow: 
+        0 0 30px rgba(255, 80, 0, 0.6),
+        inset 0 0 20px rgba(255, 60, 0, 0.4),
+        0 0 60px rgba(255, 40, 0, 0.3);
+    transform: translateY(-5px) scale(1.02);
+    border-color: #ff6600 !important;
+    z-index: 10;
+}
+
+@keyframes fire-glow {
+    0% {
+        background: linear-gradient(
+            45deg,
+            transparent 0%,
+            rgba(255, 120, 0, 0.1) 30%,
+            rgba(255, 70, 0, 0.2) 50%,
+            rgba(255, 120, 0, 0.1) 70%,
+            transparent 100%
+        );
+        filter: blur(5px);
+    }
+    50% {
+        background: linear-gradient(
+            45deg,
+            transparent 0%,
+            rgba(255, 140, 0, 0.15) 30%,
+            rgba(255, 90, 0, 0.25) 50%,
+            rgba(255, 140, 0, 0.15) 70%,
+            transparent 100%
+        );
+        filter: blur(8px);
+    }
+    100% {
+        background: linear-gradient(
+            45deg,
+            transparent 0%,
+            rgba(255, 100, 0, 0.1) 30%,
+            rgba(255, 50, 0, 0.2) 50%,
+            rgba(255, 100, 0, 0.1) 70%,
+            transparent 100%
+        );
+        filter: blur(5px);
+    }
+}
+
+/* Пулевые отверстия в шапке */
+.bullet-hole {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    background: rgba(0, 0, 0, 0.8);
+    border-radius: 50%;
+    box-shadow: 
+        inset 0 0 10px rgba(0, 0, 0, 0.9),
+        0 0 15px rgba(139, 69, 19, 0.5);
+    animation: bullet-hole-pulse 3s infinite alternate;
+    pointer-events: none;
+}
+
+@keyframes bullet-hole-pulse {
+    0%, 100% { opacity: 0.7; }
+    50% { opacity: 0.9; }
+}
+
+/* Трещины */
+.crack {
+    position: absolute;
+    height: 2px;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(139, 69, 19, 0.8),
+        transparent
+    );
+    pointer-events: none;
+}
+
+/* Вспышки выстрелов */
+.muzzle-flash {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    background: radial-gradient(
+        circle at center,
+        rgba(255, 255, 200, 0.9) 0%,
+        rgba(255, 200, 100, 0.7) 30%,
+        rgba(255, 100, 50, 0.4) 60%,
+        transparent 100%
+    );
+    border-radius: 50%;
+    filter: blur(5px);
+    animation: muzzle-flash-animation 4s infinite;
+    pointer-events: none;
+    z-index: 5;
+}
+
+@keyframes muzzle-flash-animation {
+    0%, 95% {
+        opacity: 0;
+        transform: scale(0) translate(0, 0);
+    }
+    96% {
+        opacity: 1;
+        transform: scale(1) translate(-300px, 50px);
+    }
+    98% {
+        opacity: 0.8;
+        transform: scale(0.8) translate(-280px, 45px);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(0) translate(-250px, 40px);
+    }
+}
+
+/* Дым */
+.smoke {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    background: radial-gradient(
+        circle at center,
+        rgba(100, 100, 100, 0.1) 0%,
+        rgba(50, 50, 50, 0.05) 50%,
+        transparent 100%
+    );
+    filter: blur(20px);
+    animation: smoke-drift 8s infinite linear;
+    pointer-events: none;
+}
+
+@keyframes smoke-drift {
+    0% {
+        opacity: 0;
+        transform: translate(0, 0) scale(0.5);
+    }
+    20% {
+        opacity: 0.3;
+        transform: translate(100px, -50px) scale(1);
+    }
+    40% {
+        opacity: 0.2;
+        transform: translate(200px, -100px) scale(1.2);
+    }
+    60% {
+        opacity: 0.1;
+        transform: translate(300px, -150px) scale(1.5);
+    }
+    80% {
+        opacity: 0.05;
+        transform: translate(400px, -200px) scale(2);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(500px, -250px) scale(2.5);
+    }
+}
+
+/* Вспышка при клике */
+.click-flash {
+    position: fixed;
+    width: 100px;
+    height: 100px;
+    background: radial-gradient(
+        circle at center,
+        rgba(255, 255, 200, 0.8) 0%,
+        rgba(255, 200, 100, 0.6) 30%,
+        rgba(255, 100, 50, 0.3) 60%,
+        transparent 100%
+    );
+    border-radius: 50%;
+    filter: blur(10px);
+    pointer-events: none;
+    z-index: 1000;
+    animation: click-flash-animation 0.6s forwards;
+    transform: translate(-50%, -50%);
+}
+
+@keyframes click-flash-animation {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0);
+    }
+    50% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(1.5);
+    }
+}
+
+/* Улучшаем существующие стили для поддержки эффектов */
+.header-overlay {
+    position: relative;
+    overflow: hidden;
+}
+
+.title-glow {
+    position: relative;
+    z-index: 2;
+}
+
+.subtitle {
+    position: relative;
+    z-index: 2;
+}
+
+.status-bar {
+    position: relative;
+    z-index: 2;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .muzzle-flash {
+        display: none;
+    }
+    
+    .smoke {
+        display: none;
+    }
+    
+    .fire-effect:hover {
+        transform: translateY(-3px);
+    }
+}
