@@ -1324,3 +1324,53 @@ a:focus {
         transform: translateY(-3px);
     }
 }
+/* Неоновый курсор в стиле Tarkov */
+html {
+    cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><circle cx="12" cy="12" r="6" fill="none" stroke="%23f0c87a" stroke-width="2" stroke-opacity="0.9"><animate attributeName="r" values="6;5;6" dur="2s" repeatCount="indefinite"/></circle><circle cx="12" cy="12" r="2" fill="%23f0c87a" fill-opacity="0.7"/></svg>') 12 12, auto;
+}
+
+/* Эффект при наведении на кликабельные элементы */
+a, button, .file-item, .back-button, .resource-link, 
+.tarkov-summary, .tarkov-subsummary, .audio-status {
+    cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><circle cx="16" cy="16" r="8" fill="none" stroke="%239cc090" stroke-width="3" stroke-opacity="0.9" filter="url(%23neon-glow)"><animate attributeName="r" values="8;7;8" dur="1.5s" repeatCount="indefinite"/></circle><circle cx="16" cy="16" r="3" fill="%239cc090" fill-opacity="0.9"/><defs><filter id="neon-glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="2" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs></svg>') 16 16, pointer;
+}
+
+/* Эффект для заблокированных элементов */
+.file-locked {
+    cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28"><circle cx="14" cy="14" r="7" fill="none" stroke="%23b5651d" stroke-width="2" stroke-dasharray="2,2" stroke-opacity="0.7"/><path d="M10,10 L18,18 M18,10 L10,18" stroke="%23b5651d" stroke-width="2" stroke-opacity="0.7"/></svg>') 14 14, not-allowed;
+}
+
+/* Эффект для текстового выделения */
+::selection {
+    background: rgba(240, 200, 122, 0.3);
+    color: #ffffff;
+}
+
+/* Пульсирующая анимация для курсора при наведении */
+@keyframes cursor-pulse {
+    0%, 100% { 
+        filter: drop-shadow(0 0 5px rgba(156, 192, 144, 0.8));
+    }
+    50% { 
+        filter: drop-shadow(0 0 12px rgba(156, 192, 144, 1)) 
+               drop-shadow(0 0 20px rgba(156, 192, 144, 0.5));
+    }
+}
+
+/* Применяем анимацию к курсору при наведении */
+a:hover, button:hover, .file-item:hover, .back-button:hover, 
+.resource-link:hover, .tarkov-summary:hover, 
+.tarkov-subsummary:hover, .audio-status:hover {
+    cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><circle cx="16" cy="16" r="8" fill="none" stroke="%239cc090" stroke-width="3" stroke-opacity="0.9" filter="url(%23neon-glow)"><animate attributeName="r" values="8;7;8" dur="1.5s" repeatCount="indefinite"/></circle><circle cx="16" cy="16" r="3" fill="%239cc090" fill-opacity="0.9"/><defs><filter id="neon-glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="2" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs></svg>') 16 16, pointer;
+    animation: cursor-pulse 1.5s infinite;
+}
+
+/* Эффект для интерактивных зон терминала */
+.terminal {
+    cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 26 26"><rect x="5" y="5" width="16" height="16" fill="none" stroke="%23b0c8a0" stroke-width="2" stroke-opacity="0.8"><animate attributeName="width" values="16;14;16" dur="2s" repeatCount="indefinite"/><animate attributeName="height" values="16;14;16" dur="2s" repeatCount="indefinite"/></rect><rect x="10" y="10" width="6" height="6" fill="%23b0c8a0" fill-opacity="0.7"/></svg>') 13 13, text;
+}
+
+/* Эффект для полей ввода (если будут добавлены позже) */
+input, textarea {
+    cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="24" viewBox="0 0 20 24"><path d="M5,5 L15,19 M5,19 L15,5" stroke="%23f0c87a" stroke-width="2" stroke-opacity="0.8"/><path d="M2,2 L18,22" stroke="%23f0c87a" stroke-width="1" stroke-opacity="0.6"/></svg>') 10 12, text;
+}
