@@ -9,6 +9,21 @@
 <body>
     <header>
         <div class="header-overlay">
+            <!-- Эффект пулевых отверстий -->
+            <div class="bullet-hole" style="top: 20%; left: 10%;"></div>
+            <div class="bullet-hole" style="top: 60%; left: 85%;"></div>
+            <div class="bullet-hole" style="top: 80%; left: 15%;"></div>
+            <div class="bullet-hole" style="top: 30%; left: 70%;"></div>
+            
+            <!-- Эффект трещин -->
+            <div class="crack" style="top: 10%; left: 20%; width: 60px; transform: rotate(45deg);"></div>
+            <div class="crack" style="top: 40%; left: 60%; width: 40px; transform: rotate(-20deg);"></div>
+            
+            <!-- Эффект вспышек -->
+            <div class="muzzle-flash"></div>
+            <div class="muzzle-flash" style="animation-delay: 1.5s;"></div>
+            <div class="muzzle-flash" style="animation-delay: 3.8s;"></div>
+            
             <h1 class="title-glow">АРХИВ</h1>
             <p class="subtitle">[ ХРАНИЛИЩЕ КОНТРАБАНДЫ ]</p>
             <div class="status-bar">
@@ -16,12 +31,17 @@
                 <span class="status-item">ОПАСНОСТЬ: НИЗКАЯ</span>
                 <span class="status-item">ДОСТУПНЫХ ШТУК: 2</span>
             </div>
+            
+            <!-- Дым -->
+            <div class="smoke"></div>
+            <div class="smoke" style="animation-delay: 2s;"></div>
         </div>
     </header>
 
     <div class="container file-grid">
         <div class="file-row">
-            <a href="study.html" class="file-item">
+            <a href="study.html" class="file-item fire-effect">
+                <div class="fire-overlay"></div>
                 <div class="file-header">
                     <div class="file-type">[БЕССМЫСЛЕННО]</div>
                     <div class="file-date">▼ 14.12.2023</div>
@@ -34,7 +54,8 @@
                 </div>
             </a>
 
-            <a href="3dprint.html" class="file-item">
+            <a href="3dprint.html" class="file-item fire-effect">
+                <div class="fire-overlay"></div>
                 <div class="file-header">
                     <div class="file-type">[АКТИВНО НИЧЕГО НЕ ДЕЛАЕТ]</div>
                     <div class="file-date">▼ 28.02.2024</div>
@@ -49,7 +70,8 @@
         </div>
 
         <div class="file-row">
-            <a href="media.html" class="file-item">
+            <a href="media.html" class="file-item fire-effect">
+                <div class="fire-overlay"></div>
                 <div class="file-header">
                     <div class="file-type">[ДОСТУП ОТКРЫТ]</div>
                     <div class="file-date">▼ 15.03.2024</div>
@@ -62,7 +84,8 @@
                 </div>
             </a>
 
-            <div class="file-item file-locked">
+            <div class="file-item file-locked fire-effect">
+                <div class="fire-overlay"></div>
                 <div class="file-header">
                     <div class="file-type">[ЗАБЛОКИРОВАНО]</div>
                     <div class="file-date">▼ --.--.----</div>
@@ -89,6 +112,43 @@
     </div>
 
     <script>
+        // Инициализация звуков
+        let audioEnabled = true;
+        let audioInitialized = false;
+        
+        // Звуковые эффекты
+        const fireSound = new Audio('https://assets.mixkit.co/sfx/preview/mixkit-fire-woosh-1076.mp3');
+        const shotSound = new Audio('https://assets.mixkit.co/sfx/preview/mixkit-gun-shot-1662.mp3');
+        const clickSound = new Audio('https://assets.mixkit.co/sfx/preview/mixkit-select-click-1109.mp3');
+        const hoverSound = new Audio('https://assets.mixkit.co/sfx/preview/mixkit-hover-sci-fi-mouse-811.mp3');
+        
+        // Настройка громкости
+        fireSound.volume = 0.3;
+        shotSound.volume = 0.2;
+        clickSound.volume = 0.4;
+        hoverSound.volume = 0.3;
+        
+        // Предзагрузка звуков
+        function preloadAudio() {
+            fireSound.load();
+            shotSound.load();
+            clickSound.load();
+            hoverSound.load();
+            audioInitialized = true;
+            console.log('🔊 Аудио инициализировано');
+        }
+        
+        // Ждем загрузки страницы для предзагрузки звуков
+        window.addEventListener('load', preloadAudio);
+        
+        // Активация звуков при первом взаимодействии с пользователем
+        document.addEventListener('click', () => {
+            if (!audioInitialized) {
+                preloadAudio();
+            }
+        }, { once: true });
+        
+        // Терминальный курсор
         const cursor = document.querySelector('.terminal-cursor');
         setInterval(() => cursor.style.opacity = cursor.style.opacity === '0' ? '1' : '0', 500);
         
@@ -101,6 +161,120 @@
             statusIndex = (statusIndex + 1) % statuses.length;
             statusElement.textContent = statuses[statusIndex];
         }, 3000);
+        
+        // Звуковые эффекты для блоков
+        const fileItems = document.querySelectorAll('.file-item');
+        
+        fileItems.forEach(item => {
+            // Звук при наведении
+            item.addEventListener('mouseenter', (e) => {
+                if (audioEnabled && audioInitialized) {
+                    hoverSound.currentTime = 0;
+                    hoverSound.play().catch(e => console.log('🔇 Звук наведения не воспроизведён:', e));
+                    
+                    // Дополнительный звук огня для активных блоков
+                    if (!item.classList.contains('file-locked')) {
+                        setTimeout(() => {
+                            fireSound.currentTime = 0;
+                            fireSound.play().catch(e => console.log('🔇 Звук огня не воспроизведён:', e));
+                        }, 150);
+                    }
+                }
+            });
+            
+            // Звук при клике
+            item.addEventListener('click', (e) => {
+                if (audioEnabled && audioInitialized) {
+                    // Звук клика
+                    clickSound.currentTime = 0;
+                    clickSound.play().catch(e => console.log('🔇 Звук клика не воспроизведён:', e));
+                    
+                    // Звук выстрела для незаблокированных элементов
+                    if (!item.classList.contains('file-locked')) {
+                        setTimeout(() => {
+                            shotSound.currentTime = 0;
+                            shotSound.play().catch(e => console.log('🔇 Звук выстрела не воспроизведён:', e));
+                        }, 50);
+                    }
+                    
+                    // Эффект вспышки
+                    const flash = document.createElement('div');
+                    flash.className = 'click-flash';
+                    flash.style.left = `${e.clientX}px`;
+                    flash.style.top = `${e.clientY}px`;
+                    document.body.appendChild(flash);
+                    
+                    // Задержка перехода для проигрывания звука
+                    if (!item.classList.contains('file-locked')) {
+                        e.preventDefault();
+                        setTimeout(() => {
+                            window.location.href = item.getAttribute('href');
+                        }, 300);
+                    }
+                    
+                    setTimeout(() => flash.remove(), 600);
+                }
+            });
+        });
+        
+        // Звуки для терминала (тикание)
+        const terminal = document.querySelector('.terminal');
+        let terminalTick;
+        
+        terminal.addEventListener('mouseenter', () => {
+            if (audioEnabled && audioInitialized) {
+                terminalTick = setInterval(() => {
+                    clickSound.currentTime = 0;
+                    clickSound.volume = 0.1;
+                    clickSound.play().catch(e => console.log('🔇 Терминальный звук не воспроизведён:', e));
+                }, 800);
+            }
+        });
+        
+        terminal.addEventListener('mouseleave', () => {
+            if (terminalTick) {
+                clearInterval(terminalTick);
+            }
+        });
+        
+        // Кнопка отключения звука (невидимая, активируется по Ctrl+M)
+        document.addEventListener('keydown', (e) => {
+            if (e.ctrlKey && e.key === 'm') {
+                audioEnabled = !audioEnabled;
+                const status = audioEnabled ? 'ВКЛЮЧЁН' : 'ВЫКЛЮЧЕН';
+                
+                // Создаем уведомление в терминале
+                const terminalInput = document.querySelector('.terminal-input');
+                const notification = document.createElement('div');
+                notification.className = 'terminal-line';
+                notification.innerHTML = `> АУДИО: <span class="${audioEnabled ? 'terminal-success' : 'terminal-highlight'}">${status}</span>`;
+                
+                terminalInput.parentNode.insertBefore(notification, terminalInput);
+                
+                // Удаляем уведомление через 3 секунды
+                setTimeout(() => {
+                    notification.remove();
+                }, 3000);
+                
+                // Звук переключения
+                if (audioInitialized) {
+                    clickSound.currentTime = 0;
+                    clickSound.volume = 0.5;
+                    clickSound.play().catch(e => console.log('🔇 Звук переключения не воспроизведён'));
+                }
+            }
+        });
+        
+        // Звук при загрузке страницы
+        window.addEventListener('load', () => {
+            if (audioEnabled && audioInitialized) {
+                setTimeout(() => {
+                    clickSound.currentTime = 0;
+                    clickSound.volume = 0.3;
+                    clickSound.play().catch(e => console.log('🔇 Звук загрузки не воспроизведён:', e));
+                }, 1000);
+            }
+        });
     </script>
 </body>
 </html>
