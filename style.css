@@ -1001,3 +1001,63 @@ a:focus {
 }
 
 /* Существующие стили параметров остаются без изменений */
+/* Добавить в style.css для звуковых индикаторов */
+
+/* Индикатор аудио статуса */
+.audio-status {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    background: rgba(30, 25, 20, 0.9);
+    border: 2px solid #5d4c3a;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #f0c87a;
+    font-size: 1.2rem;
+    cursor: pointer;
+    z-index: 1000;
+    transition: all 0.3s;
+}
+
+.audio-status:hover {
+    background: rgba(50, 45, 40, 0.95);
+    border-color: #f0c87a;
+    transform: scale(1.1);
+}
+
+.audio-status.muted {
+    color: #8b7355;
+}
+
+/* Уведомление в терминале */
+.terminal-line:last-of-type {
+    animation: highlight-line 2s ease-in-out;
+}
+
+@keyframes highlight-line {
+    0%, 100% { 
+        background: transparent;
+        color: #8a9c7c;
+    }
+    50% { 
+        background: rgba(240, 200, 122, 0.1);
+        color: #f0c87a;
+    }
+}
+
+/* Эффект вибрации для звуков */
+@keyframes vibrate {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-1px); }
+    75% { transform: translateX(1px); }
+}
+
+.file-item:active {
+    animation: vibrate 0.1s linear;
+}
+
+/* Остальные стили остаются без изменений из предыдущего ответа */
