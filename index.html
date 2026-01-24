@@ -157,5 +157,267 @@
             });
         });
     </script>
+    <script>
+// Fluid Cursor System для Tarkov
+class TarkovCursor {
+    constructor() {
+        this.cursor = this.createCursor();
+        this.fluid = this.createFluid();
+        this.trails = [];
+        this.mouseX = 0;
+        this.mouseY = 0;
+        this.prevX = 0;
+        this.prevY = 0;
+        this.velocity = { x: 0, y: 0 };
+        this.isHovering = false;
+        this.isClicking = false;
+        
+        this.init();
+    }
+    
+    createCursor() {
+        const cursor = document.createElement('div');
+        cursor.className = 'cursor-main';
+        cursor.innerHTML = `
+            <div class="cursor-cross"></div>
+            <div class="cursor-dot"></div>
+        `;
+        document.body.appendChild(cursor);
+        return cursor;
+    }
+    
+    createFluid() {
+        const fluid = document.createElement('div');
+        fluid.className = 'cursor-fluid';
+        document.body.appendChild(fluid);
+        return fluid;
+    }
+    
+    init() {
+        // Слушатели мыши
+        document.addEventListener('mousemove', (e) => {
+            this.prevX = this.mouseX;
+            this.prevY = this.mouseY;
+            this.mouseX = e.clientX;
+            this.mouseY = e.clientY;
+            
+            this.velocity.x = this.mouseX - this.prevX;
+            this.velocity.y = this.mouseY - this.prevY;
+            
+            this.updateCursor();
+            this.createTrail();
+        });
+        
+        document.addEventListener('mousedown', () => {
+            this.isClicking = true;
+            this.cursor.classList.add('click');
+            this.createClickEffect();
+        });
+        
+        document.addEventListener('mouseup', () => {
+            this.isClicking = false;
+            this.cursor.classList.remove('click');
+        });
+        
+        // Определение hover состояния
+        const interactiveElements = ['a', 'button', '.file-item', '.back-button', 
+                                    '.resource-link', '.tarkov-summary', 
+                                    '.tarkov-subsummary', '.audio-status', '[onclick]'];
+        
+        interactiveElements.forEach(selector => {
+            document.querySelectorAll(selector).forEach(el => {
+                el.addEventListener('mouseenter', () => {
+                    this.isHovering = true;
+                    this.cursor.classList.add('hover');
+                });
+                
+                el.addEventListener('mouseleave', () => {
+                    this.isHovering = false;
+                    this.cursor.classList.remove('hover');
+                });
+            });
+        });
+        
+        // Скрыть курсор при выходе за пределы окна
+        document.addEventListener('mouseleave', () => {
+            this.cursor.style.opacity = '0';
+        });
+        
+        document.addEventListener('mouseenter', () => {
+            this.cursor.style.opacity = '1';
+        });
+        
+        // Анимация
+        this.animate();
+    }
+    
+    updateCursor() {
+        this.cursor.style.left = this.mouseX + 'px';
+        this.cursor.style.top = this.mouseY + 'px';
+    }
+    
+    createTrail() {
+        // Создаем след только при движении
+        const speed = Math.sqrt(this.velocity.x * this.velocity.x + this.velocity.y * this.velocity.y);
+        if (speed < 2) return;
+        
+        const trail = document.createElement('div');
+        trail.className = 'cursor-trail';
+        trail.style.left = this.mouseX + 'px';
+        trail.style.top = this.mouseY + 'px';
+        trail.style.opacity = '0.3';
+        trail.style.transform = `scale(${Math.min(speed / 10, 1.5)})`;
+        
+        document.body.appendChild(trail);
+        this.trails.push(trail);
+        
+        // Ограничиваем количество следов
+        if (this.trails.length > 10) {
+            const oldTrail = this.trails.shift();
+            if (oldTrail && oldTrail.parentNode) {
+                oldTrail.parentNode.removeChild(oldTrail);
+            }
+        }
+    }
+    
+    createClickEffect() {
+        const click = document.createElement('div');
+        click.className = 'cursor-click';
+        click.style.left = this.mouseX + 'px';
+        click.style.top = this.mouseY + 'px';
+        
+        document.body.appendChild(click);
+        
+        // Удаляем после анимации
+        setTimeout(() => {
+            if (click.parentNode) {
+                click.parentNode.removeChild(click);
+            }
+        }, 600);
+    }
+    
+    animate() {
+        // Анимация следов
+        this.trails.forEach((trail, index) => {
+            if (!trail.parentNode) return;
+            
+            const currentOpacity = parseFloat(trail.style.opacity);
+            const currentScale = parseFloat(trail.style.transform.replace('scale(', '').replace(')', ''));
+            
+            trail.style.opacity = (currentOpacity - 0.05).toString();
+            trail.style.transform = `scale(${currentScale * 0.95})`;
+            
+            if (currentOpacity <= 0.05) {
+                if (trail.parentNode) {
+                    trail.parentNode.removeChild(trail);
+                }
+                this.trails.splice(index, 1);
+            }
+        });
+        
+        // Добавляем эффект дыма в canvas для fluid simulation
+        this.drawFluidEffect();
+        
+        requestAnimationFrame(() => this.animate());
+    }
+    
+    drawFluidEffect() {
+        // Упрощенная fluid simulation
+        // Для полной реализации как в примере нужен WebGL и более сложный код
+        // Здесь базовая реализация на canvas
+        if (!this.canvas) {
+            this.canvas = document.createElement('canvas');
+            this.ctx = this.canvas.getContext('2d');
+            this.canvas.width = window.innerWidth;
+            this.canvas.height = window.innerHeight;
+            this.canvas.style.position = 'fixed';
+            this.canvas.style.top = '0';
+            this.canvas.style.left = '0';
+            this.canvas.style.pointerEvents = 'none';
+            this.canvas.style.zIndex = '999998';
+            this.canvas.style.mixBlendMode = 'screen';
+            this.canvas.style.opacity = '0.3';
+            document.body.appendChild(this.canvas);
+            
+            // Очистка canvas при ресайзе
+            window.addEventListener('resize', () => {
+                this.canvas.width = window.innerWidth;
+                this.canvas.height = window.innerHeight;
+            });
+        }
+        
+        // Полупрозрачный фон для эффекта размытия
+        this.ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+        this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+        
+        // Рисуем дымчатый след
+        if (Math.abs(this.velocity.x) > 1 || Math.abs(this.velocity.y) > 1) {
+            const gradient = this.ctx.createRadialGradient(
+                this.mouseX, this.mouseY, 5,
+                this.mouseX, this.mouseY, 30
+            );
+            
+            gradient.addColorStop(0, `rgba(139, 69, 19, ${Math.min(Math.abs(this.velocity.x + this.velocity.y) / 50, 0.3)})`);
+            gradient.addColorStop(1, 'rgba(60, 50, 35, 0)');
+            
+            this.ctx.fillStyle = gradient;
+            this.ctx.beginPath();
+            this.ctx.arc(this.mouseX, this.mouseY, 30, 0, Math.PI * 2);
+            this.ctx.fill();
+            
+            // Добавляем частицы
+            if (Math.random() > 0.7) {
+                this.createParticle();
+            }
+        }
+    }
+    
+    createParticle() {
+        const particle = document.createElement('div');
+        particle.style.position = 'fixed';
+        particle.style.width = Math.random() * 5 + 2 + 'px';
+        particle.style.height = particle.style.width;
+        particle.style.background = `rgba(${Math.random() * 50 + 100}, ${Math.random() * 50 + 50}, ${Math.random() * 50 + 19}, 0.5)`;
+        particle.style.borderRadius = '50%';
+        particle.style.left = this.mouseX + 'px';
+        particle.style.top = this.mouseY + 'px';
+        particle.style.pointerEvents = 'none';
+        particle.style.zIndex = '999997';
+        particle.style.filter = 'blur(2px)';
+        
+        document.body.appendChild(particle);
+        
+        // Анимация частицы
+        const angle = Math.random() * Math.PI * 2;
+        const speed = Math.random() * 2 + 1;
+        let life = 1;
+        
+        const animateParticle = () => {
+            life -= 0.02;
+            particle.style.opacity = life;
+            particle.style.transform = `translate(${Math.cos(angle) * speed * (1 - life) * 50}px, 
+                                                ${Math.sin(angle) * speed * (1 - life) * 50}px) scale(${life})`;
+            
+            if (life > 0) {
+                requestAnimationFrame(animateParticle);
+            } else {
+                if (particle.parentNode) {
+                    particle.parentNode.removeChild(particle);
+                }
+            }
+        };
+        
+        animateParticle();
+    }
+}
+
+// Инициализация при загрузке страницы
+document.addEventListener('DOMContentLoaded', () => {
+    new TarkovCursor();
+    
+    // Отключаем стандартный курсор для всего документа
+    document.body.style.cursor = 'none';
+});
+</script>
 </body>
 </html>
