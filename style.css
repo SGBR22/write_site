@@ -325,6 +325,28 @@ details[open] summary::after {
     font-size: 0.82rem;
 }
 
+
+.section-meta {
+    margin: 0.85rem 0 0.4rem;
+    color: var(--accent);
+    font-size: 0.76rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+.group-title {
+    margin: 1rem 0 0.35rem;
+    color: var(--text-main);
+    font-size: 0.95rem;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+}
+
+.resource-desc {
+    margin-top: 0.45rem;
+    margin-bottom: 0.7rem;
+}
+
 .bullet-hole,
 .crack,
 .muzzle-flash,
