@@ -3,159 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>АРХИВ</title>
+    <title>АРХИВ / ИНФО</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header>
-        <div class="header-overlay">
-            <!-- Эффект пулевых отверстий -->
-            <div class="bullet-hole" style="top: 20%; left: 10%;"></div>
-            <div class="bullet-hole" style="top: 60%; left: 85%;"></div>
-            <div class="bullet-hole" style="top: 80%; left: 15%;"></div>
-            <div class="bullet-hole" style="top: 30%; left: 70%;"></div>
-            
-            <!-- Эффект трещин -->
-            <div class="crack" style="top: 10%; left: 20%; width: 60px; transform: rotate(45deg);"></div>
-            <div class="crack" style="top: 40%; left: 60%; width: 40px; transform: rotate(-20deg);"></div>
-            
-            <!-- Эффект вспышек -->
-            <div class="muzzle-flash"></div>
-            <div class="muzzle-flash" style="animation-delay: 1.5s;"></div>
-            <div class="muzzle-flash" style="animation-delay: 3.8s;"></div>
-            
-            <h1 class="title-glow">АРХИВ</h1>
-            <p class="subtitle">[ ХРАНИЛИЩЕ КОНТРАБАНДЫ ]</p>
-            <div class="status-bar">
-                <span class="status-item">ПОЧТИ В СЕТИ</span>
-                <span class="status-item">ОПАСНОСТЬ: НИЗКАЯ</span>
-                <span class="status-item">ДОСТУПНЫХ ШТУК: 2</span>
-            </div>
-            
-            <!-- Дым -->
-            <div class="smoke"></div>
-            <div class="smoke" style="animation-delay: 2s;"></div>
-        </div>
+        <h1 class="title-glow">Архив</h1>
+        <p class="subtitle">Информационное хранилище</p>
     </header>
 
-    <div class="container file-grid">
-        <div class="file-row">
-            <a href="study.html" class="file-item fire-effect">
-                <div class="fire-overlay"></div>
-                <div class="file-header">
-                    <div class="file-type">[БЕССМЫСЛЕННО]</div>
-                    <div class="file-date">▼ 14.12.2023</div>
-                </div>
-                <div class="file-name">ИНСТИТУТ</div>
-                <div class="file-description">Документация и протоколы обучения</div>
-                <div class="file-status">
-                    <span class="status-indicator status-restricted"></span>
-                    ДОСТУП: КАК МОЖНО РЕЖЕ
-                </div>
+    <div class="container">
+        <div class="file-grid">
+            <a href="study.html" class="file-item">
+                <span class="file-name">Институт</span>
+                <span class="file-description">Документация и протоколы обучения</span>
             </a>
 
-            <a href="3dprint.html" class="file-item fire-effect">
-                <div class="fire-overlay"></div>
-                <div class="file-header">
-                    <div class="file-type">[АКТИВНО НИЧЕГО НЕ ДЕЛАЕТ]</div>
-                    <div class="file-date">▼ 28.02.2024</div>
-                </div>
-                <div class="file-name">ПРОИЗВОДСТВО</div>
-                <div class="file-description">Производственные спецификации и логистика</div>
-                <div class="file-status">
-                    <span class="status-indicator status-active"></span>
-                    ДОСТУП: РАЗРЕШЕН
-                </div>
-            </a>
-        </div>
-
-        <div class="file-row">
-            <a href="media.html" class="file-item fire-effect">
-                <div class="fire-overlay"></div>
-                <div class="file-header">
-                    <div class="file-type">[ДОСТУП ОТКРЫТ]</div>
-                    <div class="file-date">▼ 15.03.2024</div>
-                </div>
-                <div class="file-name">МЕДИА-РЕЙД</div>
-                <div class="file-description">Кинопротоколы и сериальные контракты для привала</div>
-                <div class="file-status">
-                    <span class="status-indicator status-active"></span>
-                    ДОСТУП: РАЗРЕШЕН
-                </div>
+            <a href="3dprint.html" class="file-item">
+                <span class="file-name">Производство</span>
+                <span class="file-description">Спецификации и 3D печать</span>
             </a>
 
-            <div class="file-item file-locked fire-effect">
-                <div class="fire-overlay"></div>
-                <div class="file-header">
-                    <div class="file-type">[ЗАБЛОКИРОВАНО]</div>
-                    <div class="file-date">▼ --.--.----</div>
-                </div>
-                <div class="file-name">КОНТРАКТЫ</div>
-                <div class="file-description">Задания и маршруты доставки</div>
-                <div class="file-status">
-                    <span class="status-indicator status-locked"></span>
-                    ДОСТУП: ЗАКРЫТ
-                </div>
-            </div>
+            <a href="media.html" class="file-item">
+                <span class="file-name">Медиа</span>
+                <span class="file-description">Архив видео и контента</span>
+            </a>
         </div>
     </div>
-
-    <div class="terminal">
-        <div class="terminal-line">> ИНИЦИАЛИЗАЦИЯ СИСТЕМЫ... <span class="terminal-success">УСПЕХ</span></div>
-        <div class="terminal-line">> ЗАГРУЖЕНО РАЗДЕЛОВ: <span class="terminal-highlight">3</span></div>
-        <div class="terminal-line">> СТАТУС: <span class="terminal-status">РАЗРАБОТКА</span></div>
-        <div class="terminal-line">> СИСТЕМА ГОТОВА К ЭКСПЛУАТАЦИИ</div>
-        <div class="terminal-input">
-            <span class="terminal-prompt">></span>
-            <span class="terminal-cursor">_</span>
-        </div>
-    </div>
-
-    <script>
-        const cursor = document.querySelector('.terminal-cursor');
-        setInterval(() => cursor.style.opacity = cursor.style.opacity === '0' ? '1' : '0', 500);
-        
-        // Анимация для статуса в терминале
-        const statusElement = document.querySelector('.terminal-status');
-        let statusIndex = 0;
-        const statuses = ['РАЗРАБОТКА', 'ТЕСТИРОВАНИЕ', 'ОПЕРАТИВНЫЙ'];
-        
-        setInterval(() => {
-            statusIndex = (statusIndex + 1) % statuses.length;
-            statusElement.textContent = statuses[statusIndex];
-        }, 3000);
-        
-        // Звуковые эффекты (опционально)
-        const fileItems = document.querySelectorAll('.file-item:not(.file-locked)');
-        fileItems.forEach(item => {
-            item.addEventListener('mouseenter', () => {
-                // Воспроизведение звука огня
-                const fireSound = new Audio('https://assets.mixkit.co/sfx/preview/mixkit-fire-woosh-1076.mp3');
-                fireSound.volume = 0.3;
-                // fireSound.play(); // Раскомментировать для звука
-            });
-            
-            item.addEventListener('click', (e) => {
-                e.preventDefault();
-                // Звук выстрела при клике
-                const shotSound = new Audio('https://assets.mixkit.co/sfx/preview/mixkit-gun-shot-1662.mp3');
-                shotSound.volume = 0.2;
-                // shotSound.play(); // Раскомментировать для звука
-                
-                // Эффект вспышки
-                const flash = document.createElement('div');
-                flash.className = 'click-flash';
-                flash.style.left = `${e.clientX}px`;
-                flash.style.top = `${e.clientY}px`;
-                document.body.appendChild(flash);
-                
-                setTimeout(() => {
-                    window.location.href = item.getAttribute('href');
-                }, 300);
-                
-                setTimeout(() => flash.remove(), 600);
-            });
-        });
-    </script>
 </body>
 </html>
