@@ -295,6 +295,34 @@ details[open] summary::after {
     letter-spacing: 0.06em;
 }
 
+
+.resource-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 0.9rem;
+    margin-top: 0.6rem;
+}
+
+.resource-tile {
+    margin: 0;
+    padding: 0.95rem;
+    border: 1px solid rgba(125, 226, 255, 0.14);
+    border-radius: 10px;
+    background: rgba(11, 18, 30, 0.62);
+}
+
+.resource-grid .resource-item {
+    border-bottom: none;
+}
+
+.resource-grid .resource-header {
+    margin-bottom: 0.45rem;
+}
+
+.resource-grid .resource-link {
+    margin-top: 0.35rem;
+}
+
 .video-container {
     width: 100%;
     margin-top: 0.7rem;
@@ -334,13 +362,6 @@ details[open] summary::after {
     text-transform: uppercase;
 }
 
-.group-title {
-    margin: 1rem 0 0.35rem;
-    color: var(--text-main);
-    font-size: 0.95rem;
-    letter-spacing: 0.03em;
-    text-transform: uppercase;
-}
 
 .resource-desc {
     margin-top: 0.45rem;
